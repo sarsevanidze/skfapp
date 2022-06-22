@@ -5,25 +5,23 @@ namespace App\Nova;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Fields\Code;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
-
-class Customers extends Resource
+class Orders extends Resource
 {
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
-    public static $model = \App\Models\Customers::class;
+    public static $model = \App\Models\Orders::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.
      *
      * @var string
      */
-    public static $title = '';
+    public static $title = 'id';
 
     /**
      * The columns that should be searched.
@@ -31,7 +29,7 @@ class Customers extends Resource
      * @var array
      */
     public static $search = [
-        'first_name', 'last_name', 'user_email'
+        'id',
     ];
 
     /**
@@ -42,35 +40,20 @@ class Customers extends Resource
      */
     public function fields(NovaRequest $request)
     {
-
         return [
-            Text::make('User ID')->hideFromIndex(),
-            Text::make('First Name')->sortable(true),
-            Text::make('Last Name')->sortable(true),
-            Text::make('User Email')->sortable(true),
-            Text::make('Billing First Name')->hideFromIndex(),
-            Text::make('Billing Last Name')->hideFromIndex(),
-            Text::make('Billing Address 1')->hideFromIndex(),
-            Text::make('Billing Address 2')->hideFromIndex(),
-            Text::make('Billing City')->hideFromIndex(),
-            Text::make('Billing Postcode')->hideFromIndex(),
-            Text::make('Billing Country')->hideFromIndex(),
-            Text::make('Billing State')->hideFromIndex(),
-            Text::make('Billing Email')->hideFromIndex(),
-            Text::make('Billing Phone')->hideFromIndex(),
-            Text::make('Shipping First Name')->hideFromIndex(),
-            Text::make('Shipping Last Name')->hideFromIndex(),
-            Text::make('Shipping Address 1')->hideFromIndex(),
-            Text::make('Shipping Address 2')->hideFromIndex(),
-            Text::make('Shipping City')->hideFromIndex(),
-            Text::make('Shipping Postcode')->hideFromIndex(),
-            Text::make('Shipping Country')->hideFromIndex(),
-            Text::make('Shipping State')->hideFromIndex(),
-            Text::make('Shipping Phone')->hideFromIndex(),
-            TEXT::make('Order Data', function(){
-                return $this->getUserTotalAmount;
-            })->hideFromIndex()
-//            Text::make('Billing'),
+            TEXT::make('Order ID'),
+            TEXT::make('User Email'),
+            TEXT::make('Status'),
+            TEXT::make('Discount Tax'),
+            TEXT::make('Discount Total'),
+            TEXT::make('Shipping Tax'),
+            TEXT::make('Shipping Total'),
+            TEXT::make('Cart Tax'),
+            TEXT::make('Payment Method')->hideFromIndex(),
+            TEXT::make('Date Paid'),
+            TEXT::make('Date Completed'),
+            TEXT::make('Date Created')->hideFromIndex(),
+            TEXT::make('Date Modified')->hideFromIndex(),
 
         ];
     }
@@ -133,5 +116,4 @@ class Customers extends Resource
     {
         return false;
     }
-
 }

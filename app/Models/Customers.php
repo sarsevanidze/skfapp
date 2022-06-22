@@ -44,4 +44,9 @@ class Customers extends Model
         'shipping' => 'array',
         'billing' => 'json'
     ];
+
+    public function getUserTotalAmount(Request $request) {
+        $orders = Orders::where('user_email', $request->user_email)->get();
+        return $orders;
+    }
 }
