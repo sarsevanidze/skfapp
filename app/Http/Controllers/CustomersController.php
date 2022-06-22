@@ -3,12 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Models\Customers;
+use App\Models\Orders;
 use Codexshaper\WooCommerce\Facades\Customer;
 use Illuminate\Http\Request;
 
 class CustomersController extends Controller
 {
     //
+
+    public function getUser() {
+        $customer = Customers::find(213)->userTotalAmount;
+        dd($customer);
+        return Orders::where('status', 'completed')->where('user_email', 'melody485tw@hotmail.com')->sum('total');
+    }
 
 
     public function all(Request $request)

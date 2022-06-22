@@ -44,32 +44,27 @@ class Customers extends Resource
     {
 
         return [
-            Text::make('User ID')->hideFromIndex(),
-            Text::make('First Name')->sortable(true),
-            Text::make('Last Name')->sortable(true),
             Text::make('User Email')->sortable(true),
-            Text::make('Billing First Name')->hideFromIndex(),
-            Text::make('Billing Last Name')->hideFromIndex(),
-            Text::make('Billing Address 1')->hideFromIndex(),
-            Text::make('Billing Address 2')->hideFromIndex(),
-            Text::make('Billing City')->hideFromIndex(),
-            Text::make('Billing Postcode')->hideFromIndex(),
-            Text::make('Billing Country')->hideFromIndex(),
-            Text::make('Billing State')->hideFromIndex(),
-            Text::make('Billing Email')->hideFromIndex(),
-            Text::make('Billing Phone')->hideFromIndex(),
-            Text::make('Shipping First Name')->hideFromIndex(),
-            Text::make('Shipping Last Name')->hideFromIndex(),
-            Text::make('Shipping Address 1')->hideFromIndex(),
-            Text::make('Shipping Address 2')->hideFromIndex(),
-            Text::make('Shipping City')->hideFromIndex(),
-            Text::make('Shipping Postcode')->hideFromIndex(),
-            Text::make('Shipping Country')->hideFromIndex(),
-            Text::make('Shipping State')->hideFromIndex(),
-            Text::make('Shipping Phone')->hideFromIndex(),
-            TEXT::make('Order Data', function(){
-                return $this->getUserTotalAmount;
-            })->hideFromIndex()
+            Text::make('Billing First Name'),
+            Text::make('Billing Last Name'),
+            Text::make('Billing Company'),
+            Text::make('Billing Country', function(){
+                return $this->countryName;
+            }),
+            Text::make('Billing Phone'),
+            TEXT::make('Completed Orders', function(){
+                return $this->completedOrders;
+            })->sortable(true),
+            TEXT::make('Refunded Orders', function(){
+                return $this->refundedOrders;
+            })->sortable(true),
+            TEXT::make('Total Tax', function(){
+                return $this->totalTax;
+            })->sortable(true),
+            TEXT::make('Total', function(){
+                return $this->totalAmount;
+            })->sortable(true),
+
 //            Text::make('Billing'),
 
         ];

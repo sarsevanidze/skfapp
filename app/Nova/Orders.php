@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use App\Nova\Filters\Status;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
@@ -49,6 +50,8 @@ class Orders extends Resource
             TEXT::make('Shipping Tax'),
             TEXT::make('Shipping Total'),
             TEXT::make('Cart Tax'),
+            TEXT::make('Total Tax'),
+            TEXT::make('Total'),
             TEXT::make('Payment Method')->hideFromIndex(),
             TEXT::make('Date Paid'),
             TEXT::make('Date Completed'),
@@ -77,7 +80,9 @@ class Orders extends Resource
      */
     public function filters(NovaRequest $request)
     {
-        return [];
+        return [
+            new Status()
+        ];
     }
 
     /**
