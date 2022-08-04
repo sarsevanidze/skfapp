@@ -20,6 +20,7 @@ class CustomersController extends Controller
 
     public function all(Request $request)
     {
+
         $per_page = 100;
         $total_pages = 15;
         for ($i = 1; $i <= $total_pages; $i++) {

@@ -308,6 +308,8 @@ class Customers extends Model
         return Orders::where('status', 'completed')->where('user_email', $this->user_email)->sum('total');
     }
 
+
+
     public function getTotalTaxAttribute()
     {
         return Orders::where('status', 'completed')->where('user_email', $this->user_email)->sum('total_tax');

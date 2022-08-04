@@ -47,11 +47,28 @@ class Customers extends Resource
             Text::make('User Email')->sortable(true),
             Text::make('Billing First Name'),
             Text::make('Billing Last Name'),
-            Text::make('Billing Company'),
+            Text::make('Billing Company')->hideFromIndex(),
+            Text::make('Billing Address 1')->hideFromIndex(),
+            Text::make('Billing Address 2')->hideFromIndex(),
             Text::make('Billing Country', function(){
                 return $this->countryName;
             }),
-            Text::make('Billing Phone'),
+            Text::make('Billing State')->hideFromIndex(),
+            Text::make('Billing City')->hideFromIndex(),
+            Text::make('Billing Postcode')->hideFromIndex(),
+            Text::make('Billing Phone')->hideFromIndex(),
+            Text::make('Shipping First Name')->hideFromIndex(),
+            Text::make('Shipping Last Name')->hideFromIndex(),
+            Text::make('Shipping Company')->hideFromIndex(),
+            Text::make('Shipping Address 1')->hideFromIndex(),
+            Text::make('Shipping Address 2')->hideFromIndex(),
+            Text::make('Shipping Country', function(){
+                return $this->countryName;
+            })->hideFromIndex(),
+            Text::make('Shipping State')->hideFromIndex(),
+            Text::make('Shipping City')->hideFromIndex(),
+            Text::make('Shipping Postcode')->hideFromIndex(),
+            Text::make('Shipping Phone')->hideFromIndex(),
             TEXT::make('Completed Orders', function(){
                 return $this->completedOrders;
             })->sortable(true),
@@ -61,7 +78,7 @@ class Customers extends Resource
             TEXT::make('Total Tax', function(){
                 return $this->totalTax;
             })->sortable(true),
-            TEXT::make('Total', function(){
+            TEXT::make('Total', 'totalAmount', function(){
                 return $this->totalAmount;
             })->sortable(true),
 

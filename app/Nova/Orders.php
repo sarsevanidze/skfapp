@@ -2,6 +2,9 @@
 
 namespace App\Nova;
 
+use App\Nova\Actions\UpdateOrder;
+use App\Nova\Filters\DateCompleted;
+use App\Nova\Filters\DateCompletedFrom;
 use App\Nova\Filters\Status;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\ID;
@@ -81,7 +84,9 @@ class Orders extends Resource
     public function filters(NovaRequest $request)
     {
         return [
-            new Status()
+            new Status(),
+            new DateCompleted(),
+
         ];
     }
 
@@ -104,21 +109,26 @@ class Orders extends Resource
      */
     public function actions(NovaRequest $request)
     {
-        return [];
+        return [
+            (new UpdateOrder())
+                ->confirmText('Are you sure you want to update this order?')
+                ->confirmButtonText('Yes')
+                ->cancelButtonText("No"),
+        ];
     }
 
-    public static function authorizedToCreate(Request $request)
-    {
-        return false;
-    }
-
-    public function authorizedToDelete(Request $request)
-    {
-        return false;
-    }
-
-    public function authorizedToUpdate(Request $request)
-    {
-        return false;
-    }
+//    public static function authorizedToCreate(Request $request)
+//    {
+//        return false;
+//    }
+//
+//    public function authorizedToDelete(Request $request)
+//    {
+//        return false;
+//    }
+//
+//    public function authorizedToUpdate(Request $request)
+//    {
+//        return false;
+//    }
 }
