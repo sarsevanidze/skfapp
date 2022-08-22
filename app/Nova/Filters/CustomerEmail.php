@@ -2,21 +2,13 @@
 
 namespace App\Nova\Filters;
 
-use App\Models\Customers;
-use App\Models\Orders;
-use Illuminate\Support\Carbon;
-use Laravel\Nova\Filters\Filter;
+use App\Nova\Customers;
+use rcknr\Nova\Filters\MultiselectFilter;
+use Laravel\Nova\Filters\BooleanFilter;
 use Laravel\Nova\Http\Requests\NovaRequest;
-use Illuminate\Support\Facades\DB;
-class OrderBy extends Filter
-{
-    /**
-     * The filter's component.
-     *
-     * @var string
-     */
-    public $component = 'select-filter';
 
+class CustomerEmail extends MultiselectFilter
+{
     /**
      * Apply the filter to the given query.
      *
@@ -27,7 +19,10 @@ class OrderBy extends Filter
      */
     public function apply(NovaRequest $request, $query, $value)
     {
-        return $query;
+//        return $query->whereHas('', function ($query) use ($value) {
+//            $query->whereIn('author_id', $value);
+//        });
+        return $query->whereIn('user_email', $value);
     }
 
     /**
@@ -38,9 +33,6 @@ class OrderBy extends Filter
      */
     public function options(NovaRequest $request)
     {
-        return [
-            'Asceding' => 'asc',
-            'Desceding' => 'desc'
-        ];
+        return \App\Models\Customers::all()->pluck('id', 'user_email');
     }
 }

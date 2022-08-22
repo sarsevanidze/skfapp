@@ -23,4 +23,4 @@ Route::get('customer', [CustomersController::class, 'getUser']);
 Route::get('customers', [CustomersController::class, 'all']);
 Route::get('orders', [OrdersController::class, 'all']);
 Route::get('order/{id}', [OrdersController::class, 'getByOrderId']);
-
+Route::get('syncorders', [OrdersController::class, 'syncorders']);

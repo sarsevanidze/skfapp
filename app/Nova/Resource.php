@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use Doctrine\DBAL\Schema\Schema;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Resource as NovaResource;
 
@@ -14,8 +15,10 @@ abstract class Resource extends NovaResource
      * @param  \Illuminate\Database\Eloquent\Builder  $query
      * @return \Illuminate\Database\Eloquent\Builder
      */
+
     public static function indexQuery(NovaRequest $request, $query)
     {
+
         return $query;
     }
 

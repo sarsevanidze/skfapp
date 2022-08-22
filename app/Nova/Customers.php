@@ -2,7 +2,10 @@
 
 namespace App\Nova;
 
+use App\Nova\Filters\CustomerEmail;
+use App\Nova\Filters\OrderBy;
 use Illuminate\Http\Request;
+use Laravel\Nova\Fields\BelongsToMany;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Code;
@@ -78,11 +81,9 @@ class Customers extends Resource
             TEXT::make('Total Tax', function(){
                 return $this->totalTax;
             })->sortable(true),
-            TEXT::make('Total', 'totalAmount', function(){
+            TEXT::make('Total', 'total', function(){
                 return $this->totalAmount;
-            })->sortable(true),
-
-//            Text::make('Billing'),
+            })->sortable('total'),
 
         ];
     }
@@ -106,7 +107,10 @@ class Customers extends Resource
      */
     public function filters(NovaRequest $request)
     {
-        return [];
+        return [
+            new OrderBy(),
+            new CustomerEmail()
+        ];
     }
 
     /**

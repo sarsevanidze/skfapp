@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Nova\Http\Requests\NovaRequest;
 
 class Customers extends Model
 {
@@ -289,6 +290,15 @@ class Customers extends Model
         'ZW' => 'Zimbabwe'
     );
 
+
+
+
+    public function CustomersAndOrders(): HasMany
+    {
+        return $this->belongsToMany(CustomersAndOrders::class, 'customers_and_orders', 'user_email');
+    }
+
+
     public function getCountryNameAttribute() {
         return !empty($this->billing_country) ? $this->countryList[$this->billing_country] : '-';
     }
@@ -307,8 +317,6 @@ class Customers extends Model
     {
         return Orders::where('status', 'completed')->where('user_email', $this->user_email)->sum('total');
     }
-
-
 
     public function getTotalTaxAttribute()
     {

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Customers;
+use App\Models\CustomersAndOrders;
 use App\Models\Orders;
 use Codexshaper\WooCommerce\Facades\Order;
 use Codexshaper\WooCommerce\Facades\Refund;
@@ -254,6 +255,19 @@ class OrdersController extends Controller
                 'total_items' => json_encode($data->line_items)
             ]);
             echo 'old' . $order->order_id; echo '<br>';
+        }
+    }
+
+
+    public function syncorders() {
+        $orders = Orders::get();
+        foreach($orders as $order) {
+
+            $rel = new CustomersAndOrders();
+            $rel->order_id = $order->order_id;
+            $rel->user_email = $order->user_email;
+            $rel->save();
+            echo 'ok';
         }
     }
 
